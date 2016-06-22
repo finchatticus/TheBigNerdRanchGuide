@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BeatBox/BeatBox.iml" filepath="$PROJECT_DIR$/.idea/modules/BeatBox/BeatBox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BigNerdRanchGuide.iml" filepath="$PROJECT_DIR$/.idea/modules/BigNerdRanchGuide.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CriminalIntent/CriminalIntent.iml" filepath="$PROJECT_DIR$/.idea/modules/CriminalIntent/CriminalIntent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DragAndDraw/DragAndDraw.iml" filepath="$PROJECT_DIR$/.idea/modules/DragAndDraw/DragAndDraw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GeoQuiz/GeoQuiz.iml" filepath="$PROJECT_DIR$/.idea/modules/GeoQuiz/GeoQuiz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Locatr/Locatr.iml" filepath="$PROJECT_DIR$/.idea/modules/Locatr/Locatr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/NerdLauncher/NerdLauncher.iml" filepath="$PROJECT_DIR$/.idea/modules/NerdLauncher/NerdLauncher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PhotoGallery/PhotoGallery.iml" filepath="$PROJECT_DIR$/.idea/modules/PhotoGallery/PhotoGallery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sunset/Sunset.iml" filepath="$PROJECT_DIR$/.idea/modules/Sunset/Sunset.iml" />
+    </modules>
+  </component>
+</project>
