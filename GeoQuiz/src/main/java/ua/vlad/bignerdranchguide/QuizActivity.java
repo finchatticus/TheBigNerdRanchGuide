@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,8 +13,8 @@ public class QuizActivity extends AppCompatActivity {
 
     private Button buttonTrue;
     private Button buttonFalse;
-    private Button buttonNext;
-    private Button buttonPrev;
+    private ImageButton buttonPrev;
+    private ImageButton buttonNext;
     private TextView textViewQuestion;
 
     private Question[] questionBank = new Question[] {
@@ -57,7 +58,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        buttonPrev = (Button) findViewById(R.id.button_prev);
+        buttonPrev = (ImageButton) findViewById(R.id.button_prev);
         buttonPrev.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +71,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        buttonNext = (Button) findViewById(R.id.button_next);
+        buttonNext = (ImageButton) findViewById(R.id.button_next);
         buttonNext.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
