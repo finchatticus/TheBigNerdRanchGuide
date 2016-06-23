@@ -9,10 +9,10 @@
         tools:context="ua.vlad.bignerdranchguide.QuizActivity">
 
     <TextView
+            android:id="@+id/text_view_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:text="@string/question_text"/>
+            android:padding="24dp" />
 
     <LinearLayout
             android:layout_width="wrap_content"
@@ -20,18 +20,22 @@
             android:orientation="horizontal">
 
         <Button
-                android:id="@+id/buttonTrue"
+                android:id="@+id/button_true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/button_true" />
 
         <Button
-                android:id="@+id/buttonFalse"
+                android:id="@+id/button_false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/button_false" />
 
     </LinearLayout>
 
+    <Button android:id="@+id/button_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_next" />
 
 </LinearLayout>
