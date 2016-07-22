@@ -3,6 +3,7 @@ package ua.vlad.bignerdranchguide;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -133,5 +134,25 @@ public class QuizActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy called");
+    }
+
+    /*
+    *
+    *  Buttons in Android
+    * | Back button | Home button | Recent apps button |
+    *
+    *
+     */
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            Log.d(TAG, "Back button click");
+        }
+
+        int clickedButtonKey = event.getKeyCode();
+        Log.d(TAG, "Button click code " + clickedButtonKey + " " + KeyEvent.keyCodeToString(clickedButtonKey));
+
+        return super.onKeyDown(keyCode, event);
     }
 }
