@@ -17,8 +17,8 @@ public class QuizActivity extends AppCompatActivity {
 
     private Button buttonTrue;
     private Button buttonFalse;
-    private ImageButton buttonPrev;
-    private ImageButton buttonNext;
+    private Button buttonPrev;
+    private Button buttonNext;
     private TextView textViewQuestion;
 
     private Question[] questionBank = new Question[] {
@@ -64,7 +64,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        buttonPrev = (ImageButton) findViewById(R.id.button_prev);
+        buttonPrev = (Button) findViewById(R.id.button_prev);
         buttonPrev.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +77,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        buttonNext = (ImageButton) findViewById(R.id.button_next);
+        buttonNext = (Button) findViewById(R.id.button_next);
         buttonNext.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

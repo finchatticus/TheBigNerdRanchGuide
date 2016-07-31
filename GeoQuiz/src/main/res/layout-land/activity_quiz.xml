@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:context="ua.vlad.bignerdranchguide.QuizActivity">
+        android:layout_height="match_parent">
 
     <TextView
             android:id="@+id/text_view_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:padding="24dp" />
 
     <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
             android:orientation="horizontal">
 
         <Button
@@ -33,27 +31,24 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+            android:id="@+id/button_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="bottom|left"
+            android:text="@string/button_prev"
+            android:drawableLeft="@mipmap/arrow_left"
+            android:drawablePadding="4dp"
+            android:contentDescription="@string/content_desc_button_prev"/>
 
-        <Button
-                android:id="@+id/button_prev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_prev"
-                android:drawableLeft="@mipmap/arrow_left"
-                android:contentDescription="@string/content_desc_button_prev"/>
+    <Button
+            android:id="@+id/button_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:text="@string/button_next"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="4dp"
+            android:contentDescription="@string/content_desc_button_next"/>
 
-        <Button
-                android:id="@+id/button_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_next"
-                android:drawableRight="@mipmap/arrow_right"
-                android:contentDescription="@string/content_desc_button_next"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</FrameLayout>
