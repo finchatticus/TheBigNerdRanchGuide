@@ -15,8 +15,10 @@ public class CheatActivity extends AppCompatActivity {
     private static final String TAG = CheatActivity.class.getSimpleName();
     private static final String EXTRA_ANSWER_IS_TRUE = CheatActivity.class.getCanonicalName() + "." + "answer_is_true";
     private static final String EXTRA_ANSWER_SHOWN = CheatActivity.class.getCanonicalName() + "." + "answer_shown";
+    private static final String KEY_IS_ANSWER_SHOWN = "is_answer_shown";
 
     private boolean answerIsTrue;
+    private boolean isAnswerShown;
 
     private TextView textViewAnswer;
     private Button buttonShowAnswer;
@@ -27,6 +29,11 @@ public class CheatActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate called");
 
         setContentView(R.layout.activity_cheat);
+
+        if(savedInstanceState != null) {
+            isAnswerShown = savedInstanceState.getBoolean(KEY_IS_ANSWER_SHOWN);
+            setAnswerShownResult(isAnswerShown);
+        }
 
         answerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
@@ -41,10 +48,17 @@ public class CheatActivity extends AppCompatActivity {
                 } else {
                     textViewAnswer.setText(R.string.button_false);
                 }
-
-                setAnswerShownResult(true);
+                isAnswerShown = true;
+                setAnswerShownResult(isAnswerShown);
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d(TAG, "onSaveInstance called");
+        outState.putBoolean(KEY_IS_ANSWER_SHOWN, isAnswerShown);
     }
 
     public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
