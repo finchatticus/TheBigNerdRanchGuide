@@ -1,11 +1,15 @@
 package ua.vlad.bignerdranchguide;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -58,6 +62,27 @@ public class CheatActivity extends AppCompatActivity {
 
                 isAnswerShown[currentIndex] = true;
                 setAnswerShownResult(isAnswerShown);
+
+
+                //add animation working in API Level 21(Lollipop)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    int cx = buttonShowAnswer.getWidth() / 2;
+                    int cy = buttonShowAnswer.getHeight() / 2;
+                    float radius = buttonShowAnswer.getWidth();
+                    Animator animator = ViewAnimationUtils.createCircularReveal(buttonShowAnswer, cx, cy, radius, 0);
+                    animator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            textViewAnswer.setVisibility(View.VISIBLE);
+                            buttonShowAnswer.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                    animator.start();
+                } else {
+                    textViewAnswer.setVisibility(View.VISIBLE);
+                    buttonShowAnswer.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }
