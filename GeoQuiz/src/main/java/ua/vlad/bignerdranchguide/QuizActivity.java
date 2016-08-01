@@ -1,5 +1,7 @@
 package ua.vlad.bignerdranchguide;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,10 +16,13 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = QuizActivity.class.getSimpleName();
     private static final String KEY_INDEX = "index";
+    private static final int REQUEST_CODE_CHEAT = 0;
+
 
     private Button buttonTrue;
     private Button buttonFalse;
     private Button buttonPrev;
+    private Button buttonCheat;
     private Button buttonNext;
     private TextView textViewQuestion;
 
@@ -31,6 +35,7 @@ public class QuizActivity extends AppCompatActivity {
     };
 
     private int currentIndex = 0;
+    private boolean isCheater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +87,39 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        buttonCheat = (Button) findViewById(R.id.button_cheat);
+        buttonCheat.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean answerIsTrue = questionBank[currentIndex].isAnswerTrue();
+                Intent i = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+                startActivityForResult(i, REQUEST_CODE_CHEAT);
+            }
+        });
+
         buttonNext = (Button) findViewById(R.id.button_next);
         buttonNext.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 currentIndex = (currentIndex + 1) % questionBank.length;
+                isCheater = false;
                 updateQuestion();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "onActivityResult called");
+        if(resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if(requestCode == REQUEST_CODE_CHEAT) {
+            if(data == null) {
+                return;
+            }
+            isCheater = CheatActivity.wasAnswerShown(data);
+        }
     }
 
     private void updateQuestion() {
@@ -102,12 +132,15 @@ public class QuizActivity extends AppCompatActivity {
 
         int messageResId = 0;
 
-        if(userPressedTrue == answerIsTrue) {
-            messageResId = R.string.toast_correct;
+        if(isCheater) {
+            messageResId = R.string.toast_judgment;
         } else {
-            messageResId = R.string.toast_incorrect;
+            if (userPressedTrue == answerIsTrue) {
+                messageResId = R.string.toast_correct;
+            } else {
+                messageResId = R.string.toast_incorrect;
+            }
         }
-
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
 
