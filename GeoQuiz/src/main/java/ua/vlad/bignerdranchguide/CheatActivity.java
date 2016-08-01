@@ -15,10 +15,13 @@ public class CheatActivity extends AppCompatActivity {
     private static final String TAG = CheatActivity.class.getSimpleName();
     private static final String EXTRA_ANSWER_IS_TRUE = CheatActivity.class.getCanonicalName() + "." + "answer_is_true";
     private static final String EXTRA_ANSWER_SHOWN = CheatActivity.class.getCanonicalName() + "." + "answer_shown";
+    private static final String EXTRA_CURRENT_INDEX = CheatActivity.class.getCanonicalName() + "." + "current_index";
     private static final String KEY_IS_ANSWER_SHOWN = "is_answer_shown";
+    private static final String KEY_CURRENT_INDEX = "current_index";
 
     private boolean answerIsTrue;
-    private boolean isAnswerShown;
+    private boolean isAnswerShown[] = new boolean[5];
+    private int currentIndex;
 
     private TextView textViewAnswer;
     private Button buttonShowAnswer;
@@ -31,11 +34,15 @@ public class CheatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cheat);
 
         if(savedInstanceState != null) {
-            isAnswerShown = savedInstanceState.getBoolean(KEY_IS_ANSWER_SHOWN);
+            isAnswerShown = savedInstanceState.getBooleanArray(KEY_IS_ANSWER_SHOWN);
+            currentIndex = savedInstanceState.getInt(KEY_CURRENT_INDEX);
+
             setAnswerShownResult(isAnswerShown);
         }
 
         answerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
+        currentIndex = getIntent().getIntExtra(EXTRA_CURRENT_INDEX, 0);
+        isAnswerShown = getIntent().getBooleanArrayExtra(EXTRA_ANSWER_SHOWN);
 
         textViewAnswer = (TextView) findViewById(R.id.text_view_answer);
 
@@ -48,7 +55,8 @@ public class CheatActivity extends AppCompatActivity {
                 } else {
                     textViewAnswer.setText(R.string.button_false);
                 }
-                isAnswerShown = true;
+
+                isAnswerShown[currentIndex] = true;
                 setAnswerShownResult(isAnswerShown);
             }
         });
@@ -58,20 +66,23 @@ public class CheatActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstance called");
-        outState.putBoolean(KEY_IS_ANSWER_SHOWN, isAnswerShown);
+        outState.putBooleanArray(KEY_IS_ANSWER_SHOWN, isAnswerShown);
+        outState.putInt(KEY_CURRENT_INDEX, currentIndex);
     }
 
-    public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
+    public static Intent newIntent(Context packageContext, boolean answerIsTrue, int currentIndex, boolean[] isAnswerShown) {
         Intent i = new Intent(packageContext, CheatActivity.class);
         i.putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue);
+        i.putExtra(EXTRA_CURRENT_INDEX, currentIndex);
+        i.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
         return i;
     }
 
-    public static boolean wasAnswerShown(Intent result) {
-        return result.getBooleanExtra(EXTRA_ANSWER_SHOWN, false);
+    public static boolean[] wasAnswerShown(Intent result) {
+        return result.getBooleanArrayExtra(EXTRA_ANSWER_SHOWN);
     }
 
-    private void setAnswerShownResult(boolean isAnswerShown) {
+    private void setAnswerShownResult(boolean[] isAnswerShown) {
         Intent data = new Intent();
         data.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
         setResult(RESULT_OK, data);

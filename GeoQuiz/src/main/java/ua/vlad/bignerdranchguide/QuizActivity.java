@@ -36,7 +36,7 @@ public class QuizActivity extends AppCompatActivity {
     };
 
     private int currentIndex = 0;
-    private boolean isCheater;
+    private boolean isCheater[] = new boolean[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if(savedInstanceState != null) {
             currentIndex = savedInstanceState.getInt(KEY_INDEX);
-            isCheater = savedInstanceState.getBoolean(KEY_IS_CHEATER);
+            isCheater = savedInstanceState.getBooleanArray(KEY_IS_CHEATER);
         }
 
         textViewQuestion = (TextView) findViewById(R.id.text_view_question);
@@ -94,7 +94,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean answerIsTrue = questionBank[currentIndex].isAnswerTrue();
-                Intent i = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+                Intent i = CheatActivity.newIntent(QuizActivity.this, answerIsTrue, currentIndex, isCheater);
                 startActivityForResult(i, REQUEST_CODE_CHEAT);
             }
         });
@@ -104,7 +104,6 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 currentIndex = (currentIndex + 1) % questionBank.length;
-                isCheater = false;
                 updateQuestion();
             }
         });
@@ -134,7 +133,7 @@ public class QuizActivity extends AppCompatActivity {
 
         int messageResId = 0;
 
-        if(isCheater) {
+        if(isCheater[currentIndex]) {
             messageResId = R.string.toast_judgment;
         } else {
             if (userPressedTrue == answerIsTrue) {
@@ -151,7 +150,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState called");
         outState.putInt(KEY_INDEX, currentIndex);
-        outState.putBoolean(KEY_IS_CHEATER, isCheater);
+        outState.putBooleanArray(KEY_IS_CHEATER, isCheater);
     }
 
     @Override
