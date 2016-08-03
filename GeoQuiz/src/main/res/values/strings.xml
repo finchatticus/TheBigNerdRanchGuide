@@ -19,6 +19,6 @@
     <string name="button_cheat">Cheat!</string>
     <string name="toast_judgment">Cheating is wrong.</string>
     <string name="title_activity_cheat">CheatActivity</string>
+    <string name="text_view_api_level">API level </string>
 
-    <string name="hello_world">Hello world!</string>
 </resources>

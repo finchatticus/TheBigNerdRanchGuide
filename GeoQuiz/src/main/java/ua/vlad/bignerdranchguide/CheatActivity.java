@@ -29,6 +29,7 @@ public class CheatActivity extends AppCompatActivity {
 
     private TextView textViewAnswer;
     private Button buttonShowAnswer;
+    private TextView textViewApiLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,12 @@ public class CheatActivity extends AppCompatActivity {
                 }
             }
         });
+
+        int version = Build.VERSION.SDK_INT;
+        String APILevel = getString(R.string.text_view_api_level);
+
+        textViewApiLevel = (TextView) findViewById(R.id.text_view_api_level);
+        textViewApiLevel.setText(APILevel + Integer.toString(version));
     }
 
     @Override
