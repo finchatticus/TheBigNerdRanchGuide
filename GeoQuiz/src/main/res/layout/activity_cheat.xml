@@ -23,11 +23,34 @@
             android:layout_height="wrap_content"
             android:text="@string/show_answer_button"/>
 
-    <TextView android:id="@+id/text_view_api_level"
+    <TextView android:id="@+id/text_view_manufacturer"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:padding="24dp"
-              android:text="@string/text_view_api_level"
-              tools:text="API level 21"/>
+              android:paddingTop="24dp"
+              android:paddingBottom="4dp"
+              android:text="@string/text_view_manufacturer"
+              tools:text="Manufacturer"/>
+
+    <TextView android:id="@+id/text_view_model"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="4dp"
+              android:text="@string/text_view_model"
+              tools:text="Model"/>
+
+    <TextView android:id="@+id/text_view_version"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="4dp"
+              android:text="@string/text_view_version"
+              tools:text="Version"/>
+
+    <TextView android:id="@+id/text_view_version_release"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="4dp"
+              android:text="@string/text_view_version_release"
+              tools:text="Version release"/>
+
     
 </LinearLayout>

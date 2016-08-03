@@ -29,7 +29,10 @@ public class CheatActivity extends AppCompatActivity {
 
     private TextView textViewAnswer;
     private Button buttonShowAnswer;
-    private TextView textViewApiLevel;
+    private TextView textViewManufacturer;
+    private TextView textViewModel;
+    private TextView textViewVersion;
+    private TextView textViewVersionRelease;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +90,22 @@ public class CheatActivity extends AppCompatActivity {
             }
         });
 
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
         int version = Build.VERSION.SDK_INT;
-        String APILevel = getString(R.string.text_view_api_level);
+        String versionRelease = Build.VERSION.RELEASE;
 
-        textViewApiLevel = (TextView) findViewById(R.id.text_view_api_level);
-        textViewApiLevel.setText(APILevel + Integer.toString(version));
+        textViewManufacturer = (TextView) findViewById(R.id.text_view_manufacturer);
+        textViewManufacturer.setText(getString(R.string.text_view_manufacturer) + manufacturer);
+
+        textViewModel = (TextView) findViewById(R.id.text_view_model);
+        textViewModel.setText(getString(R.string.text_view_model) + model);
+
+        textViewVersion = (TextView) findViewById(R.id.text_view_version);
+        textViewVersion.setText(getText(R.string.text_view_version) + Integer.toString(version));
+
+        textViewVersionRelease = (TextView) findViewById(R.id.text_view_version_release);
+        textViewVersionRelease.setText(getString(R.string.text_view_version_release) + versionRelease);
     }
 
     @Override
