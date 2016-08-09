@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -33,11 +32,22 @@ public class CrimeListFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
-        crimeAdapter = new CrimeAdapter(crimes);
-        recyclerViewCrime.setAdapter(crimeAdapter);
+
+        if (crimeAdapter == null) {
+            crimeAdapter = new CrimeAdapter(crimes);
+            recyclerViewCrime.setAdapter(crimeAdapter);
+        } else {
+            crimeAdapter.notifyDataSetChanged();
+        }
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
