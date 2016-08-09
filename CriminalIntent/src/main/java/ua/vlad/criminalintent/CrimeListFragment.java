@@ -1,5 +1,6 @@
 package ua.vlad.criminalintent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -91,7 +92,8 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(), crime.getTitle(), Toast.LENGTH_SHORT).show();
+            Intent intent = CrimeActivity.newIntent(getActivity(), crime.getId());
+            startActivity(intent);
         }
     }
 }
