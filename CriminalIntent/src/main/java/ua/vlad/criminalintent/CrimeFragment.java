@@ -1,11 +1,14 @@
 package ua.vlad.criminalintent;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +17,15 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class CrimeFragment extends Fragment {
 
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
+
+    public static final int REQUEST_DATE = 0;
 
     private Crime crime;
 
@@ -59,12 +65,13 @@ public class CrimeFragment extends Fragment {
         });
 
         buttonCrimeDate = (Button) v.findViewById(R.id.button_crime_date);
-        buttonCrimeDate.setText(crime.getDate().toString());
+        updateDate();
         buttonCrimeDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
                 DatePickerFragment dialogDate = DatePickerFragment.newInstance(crime.getDate());
+                dialogDate.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
                 dialogDate.show(fragmentManager, DIALOG_DATE);
             }
         });
@@ -79,6 +86,25 @@ public class CrimeFragment extends Fragment {
         });
 
         return v;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if(requestCode == REQUEST_DATE) {
+            Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            Log.d("date", date.toString());
+            crime.setDate(date);
+            updateDate();
+        }
+    }
+
+    private void updateDate() {
+        buttonCrimeDate.setText(crime.getDate().toString());
     }
 
     public static CrimeFragment newInstance(UUID crimeId) {
