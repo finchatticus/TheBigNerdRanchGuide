@@ -64,7 +64,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
-                DatePickerFragment dialogDate = new DatePickerFragment();
+                DatePickerFragment dialogDate = DatePickerFragment.newInstance(crime.getDate());
                 dialogDate.show(fragmentManager, DIALOG_DATE);
             }
         });
