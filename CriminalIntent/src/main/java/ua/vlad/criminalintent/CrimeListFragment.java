@@ -103,10 +103,10 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Intent intent = CrimeActivity.newIntent(getActivity(), crime.getId());
             currentIndex = getAdapterPosition();
+            Intent intent = CrimePagerActivity.newIntent(getActivity(), crime.getId());
             startActivity(intent);
         }
-        
+
     }
 }
