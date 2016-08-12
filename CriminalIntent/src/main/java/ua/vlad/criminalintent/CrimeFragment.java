@@ -24,13 +24,16 @@ public class CrimeFragment extends Fragment {
 
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String DIALOG_TIME = "DialogTime";
 
     public static final int REQUEST_DATE = 0;
+    public static final int REQUEST_TIME = 1;
 
     private Crime crime;
 
     private EditText editTextTitle;
     private Button buttonCrimeDate;
+    private Button buttonCrimeTime;
     private CheckBox checkBoxSolved;
 
     @Override
@@ -76,6 +79,17 @@ public class CrimeFragment extends Fragment {
             }
         });
 
+        buttonCrimeTime = (Button) v.findViewById(R.id.button_crime_time);
+        buttonCrimeTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                TimePickerFragment dialogTime = TimePickerFragment.newInstance(crime.getDate());
+                dialogTime.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
+                dialogTime.show(fragmentManager, DIALOG_TIME);
+            }
+        });
+
         checkBoxSolved = (CheckBox) v.findViewById(R.id.checkbox_crime_solved);
         checkBoxSolved.setChecked(crime.isSolved());
         checkBoxSolved.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -97,7 +111,14 @@ public class CrimeFragment extends Fragment {
 
         if(requestCode == REQUEST_DATE) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            Log.d("date", date.toString());
+            Log.d("request_date", date.toString());
+            crime.setDate(date);
+            updateDate();
+        }
+
+        if(requestCode == REQUEST_TIME) {
+            Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            Log.d("request_time", date.toString());
             crime.setDate(date);
             updateDate();
         }
