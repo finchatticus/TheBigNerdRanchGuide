@@ -17,7 +17,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 public class CrimeFragment extends Fragment {
@@ -80,6 +82,7 @@ public class CrimeFragment extends Fragment {
         });
 
         buttonCrimeTime = (Button) v.findViewById(R.id.button_crime_time);
+        updateTime();
         buttonCrimeTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,21 +114,25 @@ public class CrimeFragment extends Fragment {
 
         if(requestCode == REQUEST_DATE) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            Log.d("request_date", date.toString());
             crime.setDate(date);
             updateDate();
         }
 
         if(requestCode == REQUEST_TIME) {
             Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
-            Log.d("request_time", date.toString());
             crime.setDate(date);
-            updateDate();
+            updateTime();
         }
     }
 
     private void updateDate() {
-        buttonCrimeDate.setText(crime.getDate().toString());
+        SimpleDateFormat formatDate = new SimpleDateFormat("E dd-MM-yyyy", Locale.ENGLISH);
+        buttonCrimeDate.setText(formatDate.format(crime.getDate()));
+    }
+
+    private void updateTime() {
+        SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+        buttonCrimeTime.setText(formatTime.format(crime.getDate()));
     }
 
     public static CrimeFragment newInstance(UUID crimeId) {
